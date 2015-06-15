@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "select2_simple_form"
   s.version     = Select2SimpleForm::VERSION
   s.authors     = ['Lautaro Nahuel De León', 'Nahuel Cuesta Luengo', 'Ivan Karl']
-  s.email       = ['laudleon@gmail.com', '', 'ivan6258@gmail.com']
+  s.email       = ['laudleon@gmail.com', 'nahuelcuestaluengo@gmail.com', 'ivan6258@gmail.com']
   s.homepage    = 'https://github.com/lndl/select2_simple_form'
   s.summary     = "Select2 inputs for SimpleForm"
   s.description = "Select2 inputs for SimpleForm"
