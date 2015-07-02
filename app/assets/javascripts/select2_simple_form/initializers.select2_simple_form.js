@@ -9,6 +9,8 @@
       return input.val().replace(/\[|\]/g, '');
     }
 
+    select2Options.placeholder = options.placeholder
+
     // Check for multiple
     if (options.multiple) {
       select2Options.multiple = true;

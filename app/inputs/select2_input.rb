@@ -15,10 +15,11 @@ class Select2Input < SimpleForm::Inputs::Base
     Class.new(input_class) do
       def input_html_options
         settings = Hash.new.tap do |s|
-          s[:url]      = options.delete(:url)      if options[:url]
-          s[:multiple] = options.delete(:multiple) if options[:multiple]
-          s[:ajax]     = options.delete(:ajax)     if options[:ajax]
-          s[:sortable] = options.delete(:sortable) if options[:sortable]
+          s[:url]         = options.delete(:url)         if options[:url]
+          s[:multiple]    = options.delete(:multiple)    if options[:multiple]
+          s[:ajax]        = options.delete(:ajax)        if options[:ajax]
+          s[:sortable]    = options.delete(:sortable)    if options[:sortable]
+          s[:placeholder] = options.delete(:placeholder) if options[:placeholder]
           s[:can_create_on_empty_result] = options.delete(:can_create_on_empty_result) if options[:can_create_on_empty_result]
         end
 
