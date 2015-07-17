@@ -72,6 +72,12 @@
 
     select2Options.formatSearching = 'Buscando...'
 
+    if (options.void_option) {
+      $input.append($('<option value="">' + options.void_option + '</option>'));
+    }
+
+    $.extend(select2Options, options.opts_for_select2 || {});
+
     return select2Options;
   };
 
