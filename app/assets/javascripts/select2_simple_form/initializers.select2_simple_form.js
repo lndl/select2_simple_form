@@ -1,5 +1,5 @@
 // Select2 for Simple Form initializer
-(function($) {
+var Select2SimpleForm = (function($) {
   'use strict';
 
   var prepareSelect2Options = function(options, $input) {
@@ -102,4 +102,11 @@
   // Load the plugin
   var eventToListen = (window.Turbolinks === undefined) ? 'ready' : 'page:change';
   $(document).on(eventToListen, initializeSelect2SimpleForm);
+
+  return {
+    init: function(options, selector) {
+      var sel = selector || 'body';
+      initializeSelect2SimpleForm.call($(sel), options);
+    }
+  }
 }(jQuery));
