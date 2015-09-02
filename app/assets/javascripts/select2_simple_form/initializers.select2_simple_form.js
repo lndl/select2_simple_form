@@ -6,7 +6,7 @@ var Select2SimpleForm = (function($) {
     var select2Options = {};
 
     var sanitizeInputValues = function(input) {
-      return input.val().replace(/\[|\]/g, '');
+      return input.val().replace(/\[|\]|\"|\'/g, '');
     }
 
     select2Options.placeholder = options.placeholder
