@@ -36,6 +36,11 @@ var Select2SimpleForm = (function($) {
         return '<span style="cursor: pointer;" onclick="openTab(\'' + options.can_create_on_empty_result.url + '\')"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' + options.can_create_on_empty_result.label + '</span>';
       }
     }
+    
+    // Allow for HTML markup to show properly in the resulting options
+    if (options.allow_html) {
+      select2Options.escapeMarkup = function(m) { return m; };
+    }
 
     // Check AJAX options
     if (options.ajax) {
@@ -58,13 +63,15 @@ var Select2SimpleForm = (function($) {
       // it will use the first item, because selects only one element.
       select2Options.initSelection = function(element, callback) {
         var ids = sanitizeInputValues(element);
-        $.get(options.ajax, { id: ids })
-        .done(function(data) {
-          if ( options.multiple ) {
-            element.val('');
-            callback(data);
-          } else {
-            callback(data[0]);
+        if (ids.length > 0) {
+          $.get(options.ajax, { id: ids })
+          .done(function(data) {
+            if ( options.multiple ) {
+              element.val('');
+              callback(data);
+            } else {
+              callback(data[0]);
+            }
           }
         });
       }
