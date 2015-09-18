@@ -72,8 +72,8 @@ var Select2SimpleForm = (function($) {
             } else {
               callback(data[0]);
             }
-          }
-        });
+          });
+        }
       }
     }
 
