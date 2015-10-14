@@ -14,9 +14,10 @@ class Select2Input < SimpleForm::Inputs::Base
   def generate_input_from(input_class)
     Class.new(input_class) do
       def input_html_options
+        sup = super
+
         settings = Hash.new.tap do |s|
           s[:url]         = options.delete(:url)         if options[:url]
-          s[:multiple]    = options.delete(:multiple)    if options[:multiple]
           s[:ajax]        = options.delete(:ajax)        if options[:ajax]
           s[:sortable]    = options.delete(:sortable)    if options[:sortable]
           s[:placeholder] = options.delete(:placeholder) if options[:placeholder]
@@ -27,7 +28,21 @@ class Select2Input < SimpleForm::Inputs::Base
           s[:allow_html]  = options.delete(:allow_html)  if options[:allow_html]
         end
 
-        super.deep_merge data: { ui: 'select2-simpleform', options: settings }
+        # Check for multiple is a special case dependent of input class
+        set_multiple_option! self.class.superclass, sup, settings if options[:multiple]
+
+        sup.deep_merge data: { ui: 'select2-simpleform', options: settings }
+      end
+
+      private
+
+      def set_multiple_option!(input_class, defaults, js_settings)
+        if input_class.equal? SimpleForm::Inputs::CollectionSelectInput
+          defaults[:multiple] = true
+        elsif input_class.equal? SimpleForm::Inputs::StringInput
+          js_settings[:multiple] = options.delete(:multiple)
+        end
+        nil
       end
     end
   end
