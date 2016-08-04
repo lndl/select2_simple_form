@@ -81,8 +81,6 @@ var Select2SimpleForm = (function($) {
       $input.append($('<option value="">' + options.void_option + '</option>'));
     }
 
-    select2Options.minimumInputLength = 1;
-
     if (options.i18n) {
       $.extend($.fn.select2.defaults, {
         formatNoMatches:       function () { return options.i18n.formatNoMatches },
