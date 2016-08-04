@@ -36,7 +36,7 @@ var Select2SimpleForm = (function($) {
         return '<span style="cursor: pointer;" onclick="openTab(\'' + options.can_create_on_empty_result.url + '\')"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' + options.can_create_on_empty_result.label + '</span>';
       }
     }
-    
+
     // Allow for HTML markup to show properly in the resulting options
     if (options.allow_html) {
       select2Options.escapeMarkup = function(m) { return m; };
@@ -77,10 +77,21 @@ var Select2SimpleForm = (function($) {
       }
     }
 
-    select2Options.formatSearching = 'Buscando...'
-
     if (options.void_option) {
       $input.append($('<option value="">' + options.void_option + '</option>'));
+    }
+
+    select2Options.minimumInputLength = 1;
+
+    if (options.i18n) {
+      $.extend($.fn.select2.defaults, {
+        formatNoMatches:       function () { return options.i18n.formatNoMatches },
+        formatInputTooShort:   function (input, min) { var n = min - input.length; return options.i18n.formatInputTooShort.replace(':n:', n) },
+        formatInputTooLong:    function (input, max) { var n = input.length - max; return options.i18n.formatInputTooLong.replace(':n:', n) },
+        formatSelectionTooBig: function (limit) { return options.i18n.formatSelectionTooBig.replace(':limit:', limit) },
+        formatLoadMore:        function (pageNumber) { return options.i18n.formatLoadMore.replace(':pageNumber:', pageNumber) },
+        formatSearching:       function () { return options.i18n.formatSearching; },
+      });
     }
 
     $.extend(select2Options, options.opts_for_select2 || {});

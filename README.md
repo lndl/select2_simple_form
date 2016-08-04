@@ -48,3 +48,33 @@ Render a Select2 performing an AJAX request that finds and shows the data (selec
 ```erb
 <%= f.input :countries, as: :select2, ajax: 'http://route/to/get/data/for/input', multiple: true %>
 ```
+
+## i18n
+
+Internationalization (i18n) can be achieved yielding a hash whose keys are equals to js format functions.
+There are two ways:
+
+### global way
+
+Using a initializer:
+```ruby
+Select2SimpleForm.configure do |config|
+  # Spanish messages
+  config.i18n = {
+    formatNoMatches:       "No se encontraron resultados",
+    formatInputTooShort:   "Por favor ingrese :n: caracter/es",
+    formatInputTooLong:    "Por favor elimine :n: caracter/es",
+    formatSelectionTooBig: "Solo puede seleccionar :limit: elemento/s",
+    formatLoadMore:        "Cargando más resultados...",
+    formatSearching:       "Buscando..."
+  }
+end
+```
+
+### in particular input
+
+```erb
+<%= f.input :persona_id, as: :select2, ajax: search_path, i18n: { formatNoMatches: 'No se ha encontrado a la persona buscada' },
+```
+
+i18n messages can have parameters (check out the 'global' example), like **:n:**, **:limit:**, in order to render the proper quantities in JS.

@@ -17,7 +17,6 @@ class Select2Input < SimpleForm::Inputs::Base
         sup = super
 
         settings = Hash.new.tap do |s|
-          s[:url]         = options.delete(:url)         if options[:url]
           s[:ajax]        = options.delete(:ajax)        if options[:ajax]
           s[:sortable]    = options.delete(:sortable)    if options[:sortable]
           s[:placeholder] = options.delete(:placeholder) if options[:placeholder]
@@ -31,6 +30,9 @@ class Select2Input < SimpleForm::Inputs::Base
         # Check for multiple is a special case dependent of input class
         set_multiple_option! self.class.superclass, sup, settings if options[:multiple]
 
+        # Set language
+        set_i18n_option! options, settings
+
         sup.deep_merge data: { ui: 'select2-simpleform', options: settings }
       end
 
@@ -43,6 +45,12 @@ class Select2Input < SimpleForm::Inputs::Base
           js_settings[:multiple] = options.delete(:multiple)
         end
         nil
+      end
+
+      def set_i18n_option!(input_options, js_settings)
+        i18n_options = (input_options[:i18n] || {}).reverse_merge(Select2SimpleForm.i18n || {})
+        js_settings[:i18n] = i18n_options if i18n_options.any?
+        true
       end
     end
   end
