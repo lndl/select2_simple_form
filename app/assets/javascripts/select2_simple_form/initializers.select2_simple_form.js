@@ -58,6 +58,9 @@ var Select2SimpleForm = (function($) {
         }
       };
 
+      // By default, minimum input length will be 1
+      select2Options.minimumInputLength = 1;
+
       // When initialize the Select2 element, checks if it's multiple or not.
       // In the first case, it will use all the data retrieved. Otherwise,
       // it will use the first item, because selects only one element.
