@@ -39,7 +39,35 @@ var Select2SimpleForm = (function($) {
 
     // Allow for HTML markup to show properly in the resulting options
     if (options.allow_html) {
+      var stripDiacritics = window.Select2.util.stripDiacritics;
+
+      // We're going to use a slight variation of Select2 markMatch function
+      // to avoid matches inside html tags:
+      function markMatch(text, term, markup, escapeMarkup) {
+        var searchRegex = stripDiacritics(term.toUpperCase()) + "(?![^<]*>)";
+        var match = stripDiacritics(text.toUpperCase()).match(searchRegex).index,
+            tl    = term.length;
+
+        if (match < 0) {
+            markup.push(escapeMarkup(text));
+            return;
+        }
+
+        markup.push(escapeMarkup(text.substring(0, match)));
+        markup.push("<span class='select2-match'>");
+        markup.push(escapeMarkup(text.substring(match, match + tl)));
+        markup.push("</span>");
+        markup.push(escapeMarkup(text.substring(match + tl, text.length)));
+      }
+
+      function formatResult(result, container, query, escapeMarkup){
+        var markup=[];
+        markMatch(this.text(result), query.term, markup, escapeMarkup);
+        return markup.join("");
+      }
+
       select2Options.escapeMarkup = function(m) { return m; };
+      select2Options.formatResult = formatResult;
     }
 
     // Check AJAX options
