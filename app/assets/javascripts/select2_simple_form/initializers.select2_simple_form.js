@@ -45,8 +45,10 @@ var Select2SimpleForm = (function($) {
       // to avoid matches inside html tags:
       function markMatch(text, term, markup, escapeMarkup) {
         var searchRegex = stripDiacritics(term.toUpperCase()) + "(?![^<]*>)";
-        var match = stripDiacritics(text.toUpperCase()).match(searchRegex).index,
+        var match = stripDiacritics(text.toUpperCase()).match(searchRegex),
             tl    = term.length;
+
+        match = match ? match.index : -1;
 
         if (match < 0) {
             markup.push(escapeMarkup(text));
