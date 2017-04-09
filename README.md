@@ -9,7 +9,7 @@ Assuming you are using SimpleForm and a working Select2 plugin (a fast way of do
 Add this to your **Gemfile**:
 
 ```ruby
-gem 'select2_simple_form'
+gem 'select2_simple_form', github: 'lndl/select2_simple_form', tag: '0.7.3'
 ```
 
 And this into your **app/assets/javascripts/application.js**
