@@ -25,8 +25,10 @@ var Select2SimpleForm = (function($) {
           var ids = $input.val().split(',');
           for (var i in ids)
             $form.append('<input type="hidden" name="' + $input.attr('name') + '[]" value="' + ids[i] + '">');
-          $input.prop('disabled', true);
+        } else {
+          $form.append('<input type="hidden" name="' + $input.attr('name') + '[]" value="">');
         }
+        $input.prop('disabled', true);
       });
     }
 

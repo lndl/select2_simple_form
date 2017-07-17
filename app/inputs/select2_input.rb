@@ -19,7 +19,7 @@ class Select2Input < SimpleForm::Inputs::Base
         settings = Hash.new.tap do |s|
           s[:ajax]        = options.delete(:ajax)        if options[:ajax]
           s[:sortable]    = options.delete(:sortable)    if options[:sortable]
-          s[:placeholder] = options.delete(:placeholder) if options[:placeholder]
+          s[:placeholder] = options.delete(:placeholder) || placeholder_text
           s[:void_option] = options.delete(:void_option) if options[:void_option]
           s[:opts_for_select2] = options.delete(:opts_for_select2) if options[:opts_for_select2]
           s[:can_create_on_empty_result] = options.delete(:can_create_on_empty_result) if options[:can_create_on_empty_result]
