@@ -45,7 +45,7 @@ var Select2SimpleForm = (function($) {
 
       // We're going to use a slight variation of Select2 markMatch function
       // to avoid matches inside html tags:
-      function markMatch(text, term, markup, escapeMarkup) {
+      markMatch = function (text, term, markup, escapeMarkup) {
         var searchRegex = stripDiacritics(term.toUpperCase()) + "(?![^<]*>)";
         var match = stripDiacritics(text.toUpperCase()).match(searchRegex),
             tl    = term.length;
@@ -64,7 +64,7 @@ var Select2SimpleForm = (function($) {
         markup.push(escapeMarkup(text.substring(match + tl, text.length)));
       }
 
-      function formatResult(result, container, query, escapeMarkup){
+      formatResult = function (result, container, query, escapeMarkup){
         var markup=[];
         markMatch(this.text(result), query.term, markup, escapeMarkup);
         return markup.join("");
