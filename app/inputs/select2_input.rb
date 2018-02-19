@@ -25,6 +25,7 @@ class Select2Input < SimpleForm::Inputs::Base
           s[:can_create_on_empty_result] = options.delete(:can_create_on_empty_result) if options[:can_create_on_empty_result]
           s[:allow_html]  = true # Default value
           s[:allow_html]  = options.delete(:allow_html)  if options[:allow_html]
+          s[:minimum_input_lenght]  = options.delete(:minimum_input_lenght)  if options[:minimum_input_lenght]
         end
 
         # Check for multiple is a special case dependent of input class
