@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", '> 4.0.0'
-  s.add_dependency 'select2-rails', '~> 3.5.2'
+  s.add_dependency 'select2-rails', '~> 4.0.3'
 end
